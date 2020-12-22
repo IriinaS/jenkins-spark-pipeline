@@ -7,23 +7,16 @@ pipeline{
                 git 'https://github.com/IriinaS/jenkins-spark-pipeline.git'
             }
         }
-        boolean compileSuccess = true
         stage('Compile') {
             steps{
                 echo "Compiling..."
-                try{
-                      sh "/usr/bin/sbt compile"
-                } catch (Exception e){
-                      compileSuccess = false
-                }
+                sh "/usr/bin/sbt compile"
             }
         }
         stage('Test') {
             steps{
-                if(compileSuccess){
-                    echo "Testing..."
-                    sh "/usr/bin/sbt test"
-                }
+                echo "Testing..."
+                sh "/usr/bin/sbt test"
             }
         }
         stage('Code Analysis') {
