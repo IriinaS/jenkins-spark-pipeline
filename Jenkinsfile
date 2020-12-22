@@ -26,5 +26,11 @@ pipeline{
                 }
             }
         }
+        stage('Code Analysis') {
+            steps {
+                echo "Analyzing..."
+                recordIssues(tools: [checkStyle(pattern: 'checkstyle-result.xml')])
+            }
+        }
     }
 }
